@@ -13,12 +13,12 @@ Like in the preview above, there is no real built-in way to preview composed eff
 ## Features
 * Particle control panel that provides QoL features and synchronized autoplay of all particle nodes in the editor
 * `SyncNode` runtime node that can play and restart all child particle nodes in a synchronized manner. By default offers "one-shot" behavior, by autoplaying on ready and self-freeing once all child particles have finished.
-* Integration of editor control panel with both native Godot particle nodes as well as the new `SyncNodes`
+* Stand-alone components, meaning each component of the plugin is optional.
 * `SyncNode` versions available for both Gpu and Cpu particles, as well as 2D and 3D
 * Both GDScript and C# compatible, with all `SyncNode` variants available in both languages.
 
 ## Installation
-Each component of `particle-scene-compositor` works fully stand-alone. You can download and use only the parts you interested in, e.g: omitting the 3d nodes in a 2d project; only download the editor panel; skip the editor panel and only use the nodes etc.
+Each component of the plugin works fully stand-alone. You can download only the parts you are interested in by selecting which folders to copy/install, e.g: Only the 2d SyncNodes and the editor panel; only the editor panel; only the 3d C# SyncNodes without the editor panel etc.
 
 To install:
 * Download the repository, and copy the relevant contents of the `addons` folder into your Godot project.
@@ -30,6 +30,7 @@ With the editor panel installed and the plugin active, the particle control pane
 <p align="center">
 <img alt="Screenshot 2024-09-17 145627" src="https://github.com/user-attachments/assets/93a3e54c-16fb-4054-8779-1201357960ea"></p>
 </p>
+
 * **Copy Particle**: Copies the selected particle node, and if it has `process_material`, will make it unique. Making the process material unique allows edits to be made on the copied node without them affecting the original, and vice versa. On `SyncNodes` and scene roots this is replaced with the option to add a new child node of the relevant type.
 * **Play Once**: Immediately (re)start particle emission of either all or only the selected particle node in the scene.
 * **Autoplay**: Continuously replay particle emissions of either all or only the selected particle node in the scene. By default, this will start particle emissions once it has received the `finished` signal from all of the emitting nodes.
