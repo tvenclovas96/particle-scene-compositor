@@ -3,15 +3,16 @@ extends EditorInspectorPlugin
 const ParticleControl = preload("res://addons/particle_scene_compositor/editor/particle_control.gd")
 const PARTICLE_CONTROL = preload("res://addons/particle_scene_compositor/editor/particle_control.tscn")
 
-const PATH_GPU_2D := "res://addons/particle_scene_compositor/sync_node_2d/gpu_sync_node_2d.gd"
-const PATH_CPU_2D := "res://addons/particle_scene_compositor/sync_node_2d/cpu_sync_node_2d.gd"
-const PATH_GPU_3D := "res://addons/particle_scene_compositor/sync_node_3d/gpu_sync_node_3d.gd"
-const PATH_CPU_3D := "res://addons/particle_scene_compositor/sync_node_3d/cpu_sync_node_3d.gd"
 
-const PATH_GPU_2D_CS := "res://addons/particle_scene_compositor/sync_node_2d_csharp/GpuSyncNode2dCs.cs"
-const PATH_CPU_2D_CS := "res://addons/particle_scene_compositor/sync_node_2d_csharp/CpuSyncNode2dCs.cs"
-const PATH_GPU_3D_CS := "res://addons/particle_scene_compositor/sync_node_3d_csharp/GpuSyncNode3dCs.cs"
-const PATH_CPU_3D_CS := "res://addons/particle_scene_compositor/sync_node_3d_csharp/CpuSyncNode3dCs.cs"
+const PATH_GPU_2D := "res://addons/particle_scene_compositor/sync_node_2d/gpu_particles/gpu_sync_node_2d.gd"
+const PATH_CPU_2D := "res://addons/particle_scene_compositor/sync_node_2d/cpu_particles/cpu_sync_node_2d.gd"
+const PATH_GPU_3D := "res://addons/particle_scene_compositor/sync_node_3d/gpu_particles/gpu_sync_node_3d.gd"
+const PATH_CPU_3D := "res://addons/particle_scene_compositor/sync_node_3d/cpu_particles/cpu_sync_node_3d.gd"
+
+const PATH_GPU_2D_CS := "res://addons/particle_scene_compositor/sync_node_2d_csharp/gpu_particles/GpuSyncNode2dCs.cs"
+const PATH_CPU_2D_CS := "res://addons/particle_scene_compositor/sync_node_2d_csharp/cpu_particles/CpuSyncNode2dCs.cs"
+const PATH_GPU_3D_CS := "res://addons/particle_scene_compositor/sync_node_3d_csharp/gpu_particles/GpuSyncNode3dCs.cs"
+const PATH_CPU_3D_CS := "res://addons/particle_scene_compositor/sync_node_3d_csharp/cpu_particles/CpuSyncNode3dCs.cs"
 const EMPTY := &""
 
 const SHOW_IF_BUILTIN_ROOT := "editor/particle_scene_compositor/show_panel_on_particle_nodes_if_scene_root"

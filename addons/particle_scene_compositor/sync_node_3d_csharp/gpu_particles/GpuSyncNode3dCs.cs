@@ -4,10 +4,13 @@ using System;
 namespace ParticleCompositor;
 
 /// <summary>
-/// Synchronization hub node that starts and tracks all child <see cref="GpuParticles3D"/>. By default,
-/// automatically starts on <see cref="_Ready"/>, and frees itself when finished.
+/// Synchronization hub node that starts and tracks all child <see cref="GpuParticles3D"/>.
+/// It will detect any <see cref="GpuParticles3D"/> if it is their ancestor in the tree; they do not need
+/// to be direct children of this node. Non-compatible node types are ignored.
+/// 
+/// <para> By default, automatically starts on <see cref="Node._Ready"/>, and frees itself when finished. </para>
 /// </summary>
-[GlobalClass, Icon("res://addons/particle_scene_compositor/sync_node_3d_csharp/Gpu3d.svg")]
+[GlobalClass, Icon("res://addons/particle_scene_compositor/sync_node_3d_csharp/gpu_particles/GpuSyncNode3dCs.cs")]
 public partial class GpuSyncNode3dCs : Node3D
 {
     /// <summary>
@@ -53,7 +56,10 @@ public partial class GpuSyncNode3dCs : Node3D
     public bool Emitting { get; private set; } = false;
 
     /// <summary>
-    /// Total elapsed time since child nodes started emitting
+    /// <see langword="true"/> if the node is currently active and not stopped.
+    /// 
+    /// <para> Note: If <see cref="TimeToFinish"/> is not 0 this may be <see langword="true"/>
+    /// while no child <see cref="GpuParticles3D"/> are currently emitting.</para>
     /// </summary>
     public float TimeElapsed { get; private set; } = 0f;
 

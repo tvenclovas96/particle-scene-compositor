@@ -4,20 +4,23 @@ using System;
 namespace ParticleCompositor;
 
 /// <summary>
-/// Synchronization hub node that starts and tracks all child <see cref="CpuParticles3D"/>. By default,
-/// automatically starts on <see cref="_Ready"/>, and frees itself when finished.
+/// Synchronization hub node that starts and tracks all child <see cref="CpuParticles2D"/>.
+/// It will detect any <see cref="CpuParticles2D"/> if it is their ancestor in the tree; they do not need
+/// to be direct children of this node. Non-compatible node types are ignored.
+/// 
+/// <para> By default, automatically starts on <see cref="Node._Ready"/>, and frees itself when finished. </para>
 /// </summary>
-[GlobalClass, Icon("res://addons/particle_scene_compositor/sync_node_3d_csharp/Cpu3d.svg")]
-public partial class CpuSyncNode3dCs : Node3D
+[GlobalClass, Icon("res://addons/particle_scene_compositor/sync_node_2d_csharp/cpu_particles/CpuSyncNode2dCs.cs")]
+public partial class CpuSyncNode2dCs : Node2D
 {
     /// <summary>
-    /// If <see langword="true"/>, the node will automatically start all child <see cref="CpuParticles3D"/> on ready
+    /// If <see langword="true"/>, the node will automatically start all child <see cref="CpuParticles2D"/> on ready
     /// </summary>
     [Export] public bool Autostart { get; set; } = true;
 
     /// <summary>
-    /// If <see langword="true"/>, all child <see cref="CpuParticles3D"/> will emit only once. Otherwise,
-    /// they will loop and restart once all <see cref="CpuParticles3D"/> have finished or <see cref="TimeToFinish"/>
+    /// If <see langword="true"/>, all child <see cref="CpuParticles2D"/> will emit only once. Otherwise,
+    /// they will loop and restart once all <see cref="CpuParticles2D"/> have finished or <see cref="TimeToFinish"/>
     /// is reached.
     /// </summary>
     [Export] public bool OneShot { get; set; } = true;
@@ -29,11 +32,11 @@ public partial class CpuSyncNode3dCs : Node3D
 
     /// <summary>
     /// if greater than 0, the node will finish once the elapsed emission time is equal
-    /// to this value or higher. Otherwise, it will finish once all child <see cref="CpuParticles3D"/>
-    /// emit their <see cref="CpuParticles3D.Finished"/> signals. Finishing will stop any ongoing child
-    /// <see cref="CpuParticles3D"/> emissions.
+    /// to this value or higher. Otherwise, it will finish once all child <see cref="CpuParticles2D"/>
+    /// emit their <see cref="CpuParticles2D.Finished"/> signals. Finishing will stop any ongoing child
+    /// <see cref="CpuParticles2D"/> emissions.
     /// 
-    /// <para> Useful when subemitters are used, since their <see cref="CpuParticles3D.Finished"/>
+    /// <para> Useful when subemitters are used, since their <see cref="CpuParticles2D.Finished"/>
     /// signal is fired before all of their particles are cleared </para>
     /// </summary>
     [Export(PropertyHint.Range, "0, 10, 0.1, or_greater")]
@@ -48,33 +51,36 @@ public partial class CpuSyncNode3dCs : Node3D
     }
     private float _timeToFinish = float.MaxValue;
     /// <summary>
-    /// is <see langword="true"/> if any child <see cref="CpuParticles3D"/> is currently emitting
+    /// is <see langword="true"/> if any child <see cref="CpuParticles2D"/> is currently emitting
     /// </summary>
     public bool Emitting { get; private set; } = false;
 
     /// <summary>
-    /// Total elapsed time since child nodes started emitting
+    /// <see langword="true"/> if the node is currently active and not stopped.
+    /// 
+    /// <para> Note: If <see cref="TimeToFinish"/> is not 0 this may be <see langword="true"/>
+    /// while no child <see cref="CpuParticles2D"/> are currently emitting.</para>
     /// </summary>
     public float TimeElapsed { get; private set; } = 0f;
 
     private int counter = 0;
 
     /// <summary>
-    /// Emitted if <see cref="OneShot"/> is <see langword="true"/> and all child <see cref="CpuParticles3D"/>
+    /// Emitted if <see cref="OneShot"/> is <see langword="true"/> and all child <see cref="CpuParticles2D"/>
     /// have finished or when <see cref="TimeToFinish"/> is reached. This is emitted right after
     /// <see cref="LoopFinished"/>. <para> If <see cref="FreeOnFinish"/> is set to <see langword="true"/>,
     /// the node will free itself after emitting this signal </para>
     /// </summary>
     public Action Finished;
     /// <summary>
-    /// Emitted after all child <see cref="CpuParticles3D"/> emit their <see cref="CpuParticles3D.Finished"/> signal
+    /// Emitted after all child <see cref="CpuParticles2D"/> emit their <see cref="CpuParticles2D.Finished"/> signal
     /// if <see cref="TimeToFinish"/> is set to 0. Otherwise, it is emitted when the elapsed emission time reaches
     /// <see cref="TimeToFinish"/>. <see cref="OneShot"/> does not affect this signal
     /// </summary>
     public Action LoopFinished;
 
     /// <summary>
-    /// Starts all child <see cref="CpuParticles3D"/>. Automatically called on <see cref="_Ready"/> if autostart is enabled.
+    /// Starts all child <see cref="CpuParticles2D"/>. Automatically called on <see cref="_Ready"/> if autostart is enabled.
     /// Returns if already emitting.
     /// <para> Optional <see cref="preprocess"/> parameter can be passed to advance all effects from emission start,
     /// such as when loading a saved game state </para>
@@ -93,8 +99,8 @@ public partial class CpuSyncNode3dCs : Node3D
     }
 
     /// <summary>
-    /// Restarts all child <see cref="CpuParticles3D"/>, interrupting any in-progress emissions.
-    /// Any newly added child <see cref="CpuParticles3D"/> nodes will be automatically included.
+    /// Restarts all child <see cref="CpuParticles2D"/>, interrupting any in-progress emissions.
+    /// Any newly added child <see cref="CpuParticles2D"/> nodes will be automatically included.
     /// <para> Optional <see cref="preprocess"/> parameter can be passed to advance all effects from emission start,
     /// such as when loading a saved game state </para>
     /// </summary>
@@ -111,7 +117,7 @@ public partial class CpuSyncNode3dCs : Node3D
     }
 
     /// <summary>
-    /// Stops all child <see cref="CpuParticles3D"/> emissions, interrupting any in-progress emissions.
+    /// Stops all child <see cref="CpuParticles2D"/> emissions, interrupting any in-progress emissions.
     /// Does not cause the <see cref="Finished"/> or <see cref="LoopFinished"/> signals to be emitted.
     /// </summary>
     public void Stop()
@@ -141,7 +147,7 @@ public partial class CpuSyncNode3dCs : Node3D
         }
     }
 
-    private static void Activate(CpuParticles3D particles)
+    private static void Activate(CpuParticles2D particles)
     {
         particles.OneShot = true;
         particles.Emitting = true;
@@ -149,7 +155,7 @@ public partial class CpuSyncNode3dCs : Node3D
     }
     private static void RecursiveStop(Node node)
     {
-        if (node is CpuParticles3D particles) particles.Emitting = false;
+        if (node is CpuParticles2D particles) particles.Emitting = false;
         foreach (Node child in node.GetChildren())
         {
             RecursiveStop(child);
@@ -158,7 +164,7 @@ public partial class CpuSyncNode3dCs : Node3D
 
     private void RecursiveActivate(Node node, float preprocess = 0f)
     {
-        if (node is CpuParticles3D particles)
+        if (node is CpuParticles2D particles)
         {
             particles.Preprocess = preprocess;
             particles.OneShot = OneShot;
@@ -176,13 +182,13 @@ public partial class CpuSyncNode3dCs : Node3D
 
     private void RecursiveRestart(Node node, float preprocess)
     {
-        if (node is CpuParticles3D particles)
+        if (node is CpuParticles2D particles)
         {
             particles.Preprocess = preprocess;
             particles.OneShot = OneShot;
             particles.Emitting = true;
             particles.Restart();
-            if (!IsConnected(CpuParticles3D.SignalName.Finished, Callable.From(Decrement)))
+            if (!IsConnected(CpuParticles2D.SignalName.Finished, Callable.From(Decrement)))
                 particles.Finished += Decrement;
         }
         {

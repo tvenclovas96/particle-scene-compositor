@@ -1,6 +1,9 @@
-@icon("res://addons/particle_scene_compositor/sync_node_3d/Gpu3d.svg")
-## Synchronization hub node that starts and tracks all child [GPUParticles3D].
-## By default, automatically starts on [method _ready], and frees itself when finished.
+@icon("res://addons/particle_scene_compositor/sync_node_3d/gpu_particles/Gpu3d.svg")
+## Synchronization hub node that starts and tracks all child [GPUParticles3D]. 
+## It will detect any [GPUParticles3D] if it is their ancestor in the tree, they do not need
+## to be direct children of this node. Non-comaptible node types are ignored.
+## [br][br]
+## By default, automatically starts on [method Node._ready], and frees itself when finished.
 class_name GPUSyncNode3D extends Node3D
 
 ## If true, will automatically start all child [GPUParticles3D] on [method _ready]
@@ -24,7 +27,8 @@ class_name GPUSyncNode3D extends Node3D
 		_time_to_finish = value if value > 0 else _max_float
 var _time_to_finish: float = _max_float
 
-## is [code]true[/code] if any [GPUParticles3D] node is currently emitting
+## [code]true[/code] if the node is currently active and not stopped. Note: If [member time_to_finish]
+## is not 0 this may be [code]true[/code] while no child [GPUParticles3D] are currently emitting.
 var emitting: bool = false
 ## Total elapsed time since child nodes started emitting
 var time_elapsed: float
@@ -32,8 +36,10 @@ var time_elapsed: float
 # internal counter to track child particle progress
 var _counter: int = 0
 
+const _max_float = 1.79769e308
+
 ## Emitted if [member one_shot] is [code]true[/code] and all child [GPUParticles3D] nodes
-## have finished or [member time_to_finish] is reached. This is emitted right after
+## have finished or [member time_to_finish] is not 0 and has been reached. This is emitted right after
 ## [signal loop_finished]. [br][br] If [member free_on_finish] is [code]true[/code], the node will
 ## free itself after emitting this signal.
 signal finished
@@ -42,15 +48,14 @@ signal finished
 ## reaches [member time_to_finish]. [member one_shot] does not affect this signal.
 signal loop_finished
 
-const _max_float = 1.79769e308
-## Starts all child [GPUParticles3D] emissions. Automatically called on [method Node._ready] if autostart is true.
-## Returns if already emitting.
+## Starts all child [GPUParticles3D] emissions. Automatically called on [method Node._ready] if
+## autostart is true. Returns and does nothing if already emitting.
 ## [br][br]
 ## Optional [param preprocess] time can be passed to advance all effects from the start,
 ## such as when loading a saved game state
 func start(preprocess: float = 0.0) -> void:
 	if emitting: return
-
+	
 	time_elapsed = preprocess
 	for child in get_children():
 		_recursive_activate(child, preprocess)
@@ -137,7 +142,7 @@ func _decrement() -> void:
 
 func _complete() -> void:
 	emitting = false
-
+	
 	loop_finished.emit()
 	if not one_shot:
 		restart()

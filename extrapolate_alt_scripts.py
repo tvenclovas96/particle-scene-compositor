@@ -12,27 +12,31 @@ def the_script_extrapolatinator(source_file: str) -> None:
     print(f"Extrapolating from script: {source_file}")
 
     # Generate the CpuParticles version of the script
-    version_cpu: str = source_code.replace("Gpu", "Cpu").replace("GPU", "CPU")
-
+    version_cpu: str = source_code.replace("Gpu", "Cpu").replace("GPU", "CPU").replace("gpu", "cpu")
     # Generate the 3D version of the script
     version_3d: str = source_code.replace("2d", "3d").replace("2D", "3D")
-
     # Generate the 3D+Cpu version of the script
-    version_3d_cpu: str = version_3d.replace("Gpu", "Cpu").replace("GPU", "CPU")
-
-    output_dir: str = os.path.dirname(source_file)
-    final_folder: str = os.path.basename(output_dir)
-    parent_dir: str = os.path.dirname(output_dir)
+    version_3d_cpu: str = version_3d.replace("Gpu", "Cpu").replace("GPU", "CPU").replace("gpu", "cpu")
     
-    if "2d" in final_folder:
-        final_folder = final_folder.replace("2d", "3d")
-    else:
-        print(f"yeah directory name error. Doesn\'t have \"2d\" in name: {final_folder}")
-    
-    output_dir3d: str = os.path.join(parent_dir, final_folder)
+    final_dir: str = os.path.dirname(source_file)
+    pre_final_dir: str = os.path.dirname(final_dir)
+    common_dir: str = os.path.dirname(pre_final_dir)
 
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
+    folder_gpu_version: str = os.path.basename(final_dir)
+    folder_2d_version: str = os.path.basename(pre_final_dir)
+
+    folder_cpu_version: str = folder_gpu_version.replace("Gpu", "Cpu").replace("GPU", "CPU").replace("gpu", "cpu")
+    folder_3d_version: str = folder_2d_version.replace("2d", "3d").replace("2D", "3D")
+
+    if folder_cpu_version == folder_gpu_version:
+        print(f"yeah directory name error. Doesn\'t have \"gpu\" in name: {folder_gpu_version}")
+    if folder_3d_version == folder_2d_version:
+        print(f"yeah directory name error. Doesn\'t have \"2d\" in name: {folder_2d_version}")
+    
+    output_dir3d: str = os.path.join(pre_final_dir, folder_gpu_version)
+
+    if not os.path.exists(final_dir):
+        os.makedirs(final_dir)
     if not os.path.exists(output_dir3d):
         os.makedirs(output_dir3d)
     
@@ -50,8 +54,14 @@ def the_script_extrapolatinator(source_file: str) -> None:
 
     for new_script, new_code in versions:
         if new_script != script_name:
-            dir = output_dir3d if "3d" in new_script else output_dir
-            with open(os.path.join(dir, new_script), "w") as file:
+            three_dee: bool = "3d" in new_script or "3D" in new_script
+            ceepeeyuu: bool = "cpu" in new_script or "CPU" in new_script or "Cpu" in new_script
+
+            folder1 = folder_cpu_version if ceepeeyuu else folder_gpu_version
+            folder2 = folder_3d_version if three_dee else folder_2d_version
+
+            the_path = os.path.join(common_dir, folder2, folder1, new_script)
+            with open(the_path, "w") as file:
                 file.write(new_code)
             print(f"Script extrapolated: {new_script}")
         else:
