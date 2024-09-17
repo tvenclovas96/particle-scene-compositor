@@ -18,8 +18,8 @@ def run_extrapolate_script(default_file_path):
         print(f"File not found: {e}")
 
 if __name__ == "__main__":
-    default_file_path = "addons\\particle_scene_compositor\\sync_node_2d\\gpu_sync_node_2d.gd"
-    default_file_path_cs = "addons\\particle_scene_compositor\\sync_node_2d_csharp\\GpuSyncNode2dCs.cs"
+    default_file_path = "addons\particle_scene_compositor\sync_node_2d\gpu_particles\gpu_sync_node_2d.gd"
+    default_file_path_cs = "addons\particle_scene_compositor\sync_node_2d_csharp\gpu_particles\GpuSyncNode2dCs.cs"
     
     # Check if the files exist before running the script
     if not os.path.exists(default_file_path):
