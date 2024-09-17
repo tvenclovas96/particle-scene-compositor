@@ -167,9 +167,7 @@ public partial class GpuSyncNode3dCs : Node3D
         if (node is GpuParticles3D particles)
         {
             particles.Preprocess = preprocess;
-            particles.OneShot = OneShot;
-            particles.Emitting = true;
-            particles.Restart();
+            Activate(particles);
             particles.Finished += Decrement;
         }
         {
@@ -185,9 +183,7 @@ public partial class GpuSyncNode3dCs : Node3D
         if (node is GpuParticles3D particles)
         {
             particles.Preprocess = preprocess;
-            particles.OneShot = OneShot;
-            particles.Emitting = true;
-            particles.Restart();
+            Activate(particles);
             if (!IsConnected(GpuParticles3D.SignalName.Finished, Callable.From(Decrement)))
                 particles.Finished += Decrement;
         }

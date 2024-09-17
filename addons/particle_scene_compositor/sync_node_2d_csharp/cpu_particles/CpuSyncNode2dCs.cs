@@ -167,9 +167,7 @@ public partial class CpuSyncNode2dCs : Node2D
         if (node is CpuParticles2D particles)
         {
             particles.Preprocess = preprocess;
-            particles.OneShot = OneShot;
-            particles.Emitting = true;
-            particles.Restart();
+            Activate(particles);
             particles.Finished += Decrement;
         }
         {
@@ -185,9 +183,7 @@ public partial class CpuSyncNode2dCs : Node2D
         if (node is CpuParticles2D particles)
         {
             particles.Preprocess = preprocess;
-            particles.OneShot = OneShot;
-            particles.Emitting = true;
-            particles.Restart();
+            Activate(particles);
             if (!IsConnected(CpuParticles2D.SignalName.Finished, Callable.From(Decrement)))
                 particles.Finished += Decrement;
         }
