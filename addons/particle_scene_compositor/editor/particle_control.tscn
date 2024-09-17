@@ -1,0 +1,198 @@
+[gd_scene load_steps=4 format=3 uid="uid://cnlglnvmljfho"]
+
+[ext_resource type="Script" path="res://addons/particle_scene_compositor/editor/particle_control.gd" id="1_uj5x3"]
+[ext_resource type="Texture2D" uid="uid://c8ub6q6bgc27s" path="res://addons/particle_scene_compositor/editor/GuiDropdown.svg" id="2_iohg0"]
+[ext_resource type="Texture2D" uid="uid://cee7lga8m41vf" path="res://addons/particle_scene_compositor/editor/GuiDropdownRight.svg" id="3_c84ob"]
+
+[node name="MainContainer" type="VBoxContainer"]
+offset_right = 258.0
+offset_bottom = 240.0
+size_flags_horizontal = 3
+script = ExtResource("1_uj5x3")
+
+[node name="DropDown" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Particle editor tools"
+icon = ExtResource("2_iohg0")
+alignment = 0
+
+[node name="MainGrid" type="GridContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 2
+
+[node name="AddParticles" type="Label" parent="MainGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Adds a new particle node of the corresponding type to this node as a child."
+mouse_filter = 0
+text = "Add Particle node"
+
+[node name="AddParticlesButton" type="Button" parent="MainGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Add Child"
+
+[node name="CopyParticles" type="Label" parent="MainGrid"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Copies the current particle node, and makes the [process_material] unique, if it has one"
+mouse_filter = 0
+text = "Copy Particle"
+
+[node name="CopyParticlesButton" type="Button" parent="MainGrid"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Copy Unique"
+
+[node name="PlayOnce" type="Label" parent="MainGrid"]
+layout_mode = 2
+tooltip_text = "Have this or all particle nodes in the tree emit their particles once"
+mouse_filter = 0
+text = "Play once"
+
+[node name="PlayOnceContainer" type="HBoxContainer" parent="MainGrid"]
+layout_mode = 2
+
+[node name="PlayOnceAllButton" type="Button" parent="MainGrid/PlayOnceContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "All"
+
+[node name="PlayOnceThisButton" type="Button" parent="MainGrid/PlayOnceContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "This"
+
+[node name="Autoplay" type="Label" parent="MainGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Have this or all particle nodes in the tree emit their particles continuously in a synchronized fashion"
+mouse_filter = 0
+text = "Autoplay"
+
+[node name="AutoplayContainer" type="HBoxContainer" parent="MainGrid"]
+layout_mode = 2
+
+[node name="AutoplayAllCheck" type="CheckBox" parent="MainGrid/AutoplayContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+text = "All"
+
+[node name="AutoplayCheck" type="CheckBox" parent="MainGrid/AutoplayContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 10
+text = "This
+"
+
+[node name="DropDown2" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Advanced"
+icon = ExtResource("3_c84ob")
+alignment = 0
+
+[node name="AdvancedGrid" type="GridContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+columns = 2
+
+[node name="Preprocess" type="Label" parent="AdvancedGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "The preprocess time in seconds set for each particle node on activation"
+mouse_filter = 0
+text = "Preprocess"
+
+[node name="PreprocessContainer" type="VBoxContainer" parent="AdvancedGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = -3
+
+[node name="PreprocessNum" type="SpinBox" parent="AdvancedGrid/PreprocessContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 10.0
+step = 0.1
+
+[node name="PreprocessSlider" type="HSlider" parent="AdvancedGrid/PreprocessContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 10.0
+step = 0.1
+allow_greater = true
+
+[node name="SetCycle" type="Label" parent="AdvancedGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Autoplay particle nodes based on a timer, instead of on all particles finished. Will cut off still-emitting particles. Useful for subemitters, since they emit their [finished] signal when their parent emiter finishes, not when their particles are cleared."
+mouse_filter = 0
+text = "Time-based autoplay"
+
+[node name="SetCycleCheck" type="CheckBox" parent="AdvancedGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+text = "On"
+
+[node name="CycleFreq" type="Label" parent="AdvancedGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Timer length in seconds to repeat particle emissions, if [Time-based autoplay] is active"
+mouse_filter = 0
+text = "Autoplay timer"
+
+[node name="CycleFreqContainer" type="VBoxContainer" parent="AdvancedGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = -3
+
+[node name="CycleFreqNum" type="SpinBox" parent="AdvancedGrid/CycleFreqContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 10.0
+step = 0.1
+value = 2.0
+
+[node name="CycleFreqSlider" type="HSlider" parent="AdvancedGrid/CycleFreqContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 10.0
+step = 0.1
+value = 2.0
+allow_greater = true
+
+[connection signal="button_up" from="DropDown" to="." method="_on_drop_down_button_up"]
+[connection signal="pressed" from="MainGrid/AddParticlesButton" to="." method="_on_add_particles_button_pressed"]
+[connection signal="pressed" from="MainGrid/CopyParticlesButton" to="." method="_on_copy_particles_button_pressed"]
+[connection signal="pressed" from="MainGrid/PlayOnceContainer/PlayOnceAllButton" to="." method="_on_play_once_all_button_pressed"]
+[connection signal="pressed" from="MainGrid/PlayOnceContainer/PlayOnceThisButton" to="." method="_on_play_once_this_button_pressed"]
+[connection signal="toggled" from="MainGrid/AutoplayContainer/AutoplayAllCheck" to="." method="_on_autoplay_all_check_toggled"]
+[connection signal="toggled" from="MainGrid/AutoplayContainer/AutoplayCheck" to="." method="_on_autoplay_check_toggled"]
+[connection signal="button_up" from="DropDown2" to="." method="_on_drop_down_2_button_up"]
+[connection signal="value_changed" from="AdvancedGrid/PreprocessContainer/PreprocessNum" to="." method="_on_preprocess_num_value_changed"]
+[connection signal="value_changed" from="AdvancedGrid/PreprocessContainer/PreprocessSlider" to="." method="_on_preprocess_slider_value_changed"]
+[connection signal="pressed" from="AdvancedGrid/SetCycleCheck" to="." method="_on_set_cycle_check_pressed"]
+[connection signal="value_changed" from="AdvancedGrid/CycleFreqContainer/CycleFreqNum" to="." method="_on_cycle_freq_num_value_changed"]
+[connection signal="value_changed" from="AdvancedGrid/CycleFreqContainer/CycleFreqSlider" to="." method="_on_cycle_freq_slider_value_changed"]

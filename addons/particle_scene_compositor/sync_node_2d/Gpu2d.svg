@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="20.650568"
+   height="20.403408"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="Gpu2d.svg"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="45.254834"
+     inkscape:cx="10.197806"
+     inkscape:cy="10.363534"
+     inkscape:window-width="2409"
+     inkscape:window-height="1855"
+     inkscape:window-x="507"
+     inkscape:window-y="138"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg1" />
+  <ellipse
+     cx="10.325284"
+     cy="10.201704"
+     fill="none"
+     stroke="#8da5f3"
+     stroke-width="3.42109"
+     id="circle1"
+     rx="8.6147394"
+     ry="8.4911594"
+     style="display:inline" />
+  <path
+     fill="#8da5f3"
+     d="m 13.583741,12.349396 a 2.5133019,2.1774248 0 0 0 0.346837,-4.3323486 3.7699529,3.6290412 0 0 0 -7.3924591,0 2.5133019,2.1774248 0 0 0 0.3468356,4.3308966 z m -6.7021376,0.725809 a 0.83776755,0.72580845 0 0 0 0,1.451616 0.83776755,0.72580845 0 0 0 0,-1.451616 z m 6.7021376,0 a 0.83776755,0.72580845 0 0 0 0,1.451616 0.83776755,0.72580845 0 0 0 0,-1.451616 z m -3.351068,0.725809 a 0.83776761,0.7258085 0 0 0 0,1.451617 0.83776761,0.7258085 0 0 0 0,-1.451617 z"
+     id="path1"
+     style="display:inline;stroke-width:0.779781" />
+</svg>
