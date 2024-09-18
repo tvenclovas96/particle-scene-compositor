@@ -21,7 +21,8 @@ Like in the preview above, there is no real built-in way to preview composed eff
 Each component of the plugin works fully stand-alone. You can download only the parts you are interested in by selecting which folders to copy/install, e.g: Only the 2d SyncNodes and the editor panel; only the editor panel; only the 3d C# SyncNodes without the editor panel etc.
 
 To install:
-* Download the repository, and copy the relevant contents of the `addons` folder into your Godot project.
+* (Recommended) Download directly from the Godot asset library. Select which folders to download and install;
+* Or download the repository, and copy the relevant contents of the `addons` folder into your Godot project.
 
 ## Usage
 ### Editor:

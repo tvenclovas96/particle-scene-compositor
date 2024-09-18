@@ -10,7 +10,7 @@ namespace ParticleCompositor;
 /// 
 /// <para> By default, automatically starts on <see cref="Node._Ready"/>, and frees itself when finished. </para>
 /// </summary>
-[GlobalClass, Icon("res://addons/particle_scene_compositor/sync_node_3d_csharp/gpu_particles/GpuSyncNode3dCs.cs")]
+[GlobalClass, Icon("res://addons/particle_scene_compositor/sync_node_3d_csharp/gpu_particles/Gpu3d.svg")]
 public partial class GpuSyncNode3dCs : Node3D
 {
     /// <summary>
