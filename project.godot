@@ -23,6 +23,10 @@ gdscript/warnings/untyped_declaration=1
 
 project/assembly_name="ParticleMRP"
 
+[editor]
+
+particle_scene_compositor/installed_version="1.0.0"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/particle_scene_compositor/editor/plugin.cfg")

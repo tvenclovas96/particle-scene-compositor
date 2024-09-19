@@ -1,0 +1,193 @@
+[gd_scene load_steps=3 format=3 uid="uid://bab0htwbrx4ct"]
+
+[ext_resource type="Script" path="res://addons/particle_scene_compositor/install_popup.gd" id="1_sgp3c"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rmcwn"]
+
+[node name="PopupPanel" type="Window"]
+initial_position = 4
+size = Vector2i(382, 459)
+wrap_controls = true
+transient = true
+transient_to_focused = true
+exclusive = true
+script = ExtResource("1_sgp3c")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 9
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "New download detected.
+Choose which components to install:"
+
+[node name="HSeparator4" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Required" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Required"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="GridContainerEditor" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 3
+
+[node name="Editor" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainerEditor"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Editor panel:"
+
+[node name="Spacer3" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainerEditor"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EditorBox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainerEditor"]
+layout_mode = 2
+size_flags_horizontal = 6
+disabled = true
+button_pressed = true
+
+[node name="HSeparator5" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Required2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Optional"
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="GridContainer2D" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+columns = 3
+
+[node name="Spacer4" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer2D"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GDScript" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer2D"]
+layout_mode = 2
+size_flags_vertical = 10
+text = "GDScript"
+horizontal_alignment = 1
+
+[node name="Csharp" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer2D"]
+layout_mode = 2
+size_flags_vertical = 10
+text = "C#"
+horizontal_alignment = 1
+
+[node name="Gpu2d" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer2D"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "GPUSyncNode2d"
+
+[node name="Gpu2dGd" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer2D"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+button_pressed = true
+
+[node name="Gpu2dCs" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer2D"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="Cpu2d" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer2D"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "CPUSyncNode2d"
+
+[node name="Cpu2dGd" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer2D"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+button_pressed = true
+
+[node name="Cpu2dCs" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer2D"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="HSeparator3" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_rmcwn")
+
+[node name="GridContainer3D" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+columns = 3
+
+[node name="Gpu3d" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer3D"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "GPUSyncNode3d"
+
+[node name="Gpu3dGd" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer3D"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+button_pressed = true
+
+[node name="Gpu3dCs" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer3D"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="Cpu3d" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer3D"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "GPUSyncNode3d"
+
+[node name="Cpu3dGd" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer3D"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+button_pressed = true
+
+[node name="Cpu3dCs" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/GridContainer3D"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="Spacer" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_stretch_ratio = 0.5
+text = "Confirm"
+
+[connection signal="button_up" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Button" to="." method="_on_button_button_up"]
