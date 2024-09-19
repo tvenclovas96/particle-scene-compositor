@@ -18,11 +18,11 @@ Like in the preview above, there is no real built-in way to preview composed eff
 * Both GDScript and C# compatible, with all `SyncNode` variants available in both languages.
 
 ## Installation
-Each component of the plugin works fully stand-alone. You can download only the parts you are interested in by selecting which folders to copy/install, e.g: Only the 2d SyncNodes and the editor panel; only the editor panel; only the 3d C# SyncNodes without the editor panel etc.
+Each component of the plugin works fully stand-alone. On installation a popup will ask which components to keep and which to omit, so there's no need to add the 3d nodes in a 2d project, or GDScript nodes in a C# project. The editor panel can't be skipped this way, but can be removed manually.
 
 To install:
-* (Recommended) Download directly from the Godot asset library. Select which folders to download and install;
-* Or download the repository, and copy the relevant contents of the `addons` folder into your Godot project.
+* (Recommended) Download directly from the Godot asset library https://godotengine.org/asset-library/asset/3352;
+* Or download the repository, and copy the `addons` folder into your Godot project.
 
 ## Usage
 ### Editor:
