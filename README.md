@@ -1,5 +1,7 @@
 # Particle Scene Compositor (Godot 4)
 
+<p align="center"><img src="icon.png" alt="Particle compositor logo"/></p>
+
 This plugin adds new nodes and associated editor tools to help create and use particle scenes.
 
 ???|Much Better!
@@ -29,7 +31,7 @@ To install:
 
 With the editor panel installed and the plugin active, the particle control panel will appear whenever a compatible node type is selected in the editor – all built in particle nodes, and any `SyncNodes`, if installed. By default, it will not appear for a built-in particle node if it is a scene root due to limited features. This can be changed in project settings.
 <p align="center">
-<img alt="Screenshot 2024-09-17 145627" src="https://github.com/user-attachments/assets/93a3e54c-16fb-4054-8779-1201357960ea"></p>
+<img alt="Particle editor panel" src="https://github.com/user-attachments/assets/93a3e54c-16fb-4054-8779-1201357960ea"></p>
 </p>
 
 * **Copy Particle**: Copies the selected particle node, and if it has `process_material`, will make it unique. Making the process material unique allows edits to be made on the copied node without them affecting the original, and vice versa. On `SyncNodes` and scene roots this is replaced with the option to add a new child node of the relevant type.
@@ -47,7 +49,7 @@ With the editor panel installed and the plugin active, the particle control pane
 
 Exported members for easy usage|SyncNodes available for each particle type in GDScript and C#
 --|--
-<img width="340" alt="Screenshot 2024-09-17 152827" src="https://github.com/user-attachments/assets/08991626-6964-48fb-8939-aa1927fae606">|<img width="551" alt="Screenshot 2024-09-17 134911" src="https://github.com/user-attachments/assets/8dbf0d44-fd85-496d-83f3-fbc7eabf74f0">
+<img width="340" alt="Syncnode properties" src="https://github.com/user-attachments/assets/08991626-6964-48fb-8939-aa1927fae606">|<img width="551" alt="Syncnode selection" src="https://github.com/user-attachments/assets/8dbf0d44-fd85-496d-83f3-fbc7eabf74f0">
 
 Besides the exported properties, for usage in code `SyncNodes` provides methods `start()`, `stop()` and `restart()`; signals `loop_finished` and `finished`; as well as properties `emitting` and `time_elapsed` to track particle progress.
 

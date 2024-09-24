@@ -101,22 +101,25 @@ func _can_handle(obj: Object) -> bool:
 	if ParticleControl.is_emitter_class(node) and can_show_if_built_in(node):
 		current_node = node
 		return true
-	if get_class_name(node) != EMPTY:
+	if is_plugin_class(obj):
 		current_node = node
 		return true
 	return false
 
 func can_show_if_built_in(node: Node) -> bool:
 	return node.owner != null or ProjectSettings.get_setting(SHOW_IF_BUILTIN_ROOT)
-	
-func get_class_name(obj: Object) -> StringName:
-	if obj.get_script() != null:
-		return (obj.get_script() as Script).get_global_name()
-	return EMPTY
+
+func is_plugin_class(obj: Object) -> bool:
+	return get_plugin_class_type(obj) != ParticleControl.type.NONE
+
+func get_plugin_class_type(obj: Object) -> ParticleControl.type:
+	if obj.get_script() == null: return ParticleControl.type.NONE
+	return class_statuses.get((obj.get_script() as Script).get_global_name(), ParticleControl.type.NONE)
+
 
 func _parse_begin(object: Object) -> void:
 	current_panel = PARTICLE_CONTROL.instantiate()
-	var type: ParticleControl.type = class_statuses.get(get_class_name(object), ParticleControl.type.NONE)
+	var type: ParticleControl.type = get_plugin_class_type(object)
 	if type == ParticleControl.type.NONE:
 		type = ParticleControl.get_enum_from_built_in_class(object.get_class())
 	
